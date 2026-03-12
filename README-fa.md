@@ -8,7 +8,7 @@
 
 ## ویژگی‌ها
 
-- **پروتکل‌های متعدد** - Reality (VLESS)، Trojan، Hysteria2، TrustTunnel، AmneziaWG، WireGuard (مستقیم و wstunnel)، تونل‌های DNS (dnstt + Slipstream)، Telegram MTProxy، CDN (VLESS+WS)
+- **پروتکل‌های متعدد** - Reality (VLESS)، Trojan، Hysteria2، XHTTP (VLESS+XHTTP+Reality)، TrustTunnel، AmneziaWG، WireGuard (مستقیم و wstunnel)، تونل‌های DNS (dnstt + Slipstream)، Telegram MTProxy، CDN (VLESS+WS)
 - **اولویت پنهان‌کاری** - تمام ترافیک شبیه HTTPS معمولی، WebSocket، DNS، یا IMAPS به نظر می‌رسد
 - **اعتبارنامه‌های جداگانه برای هر کاربر** - ایجاد، لغو و مدیریت کاربران به صورت مستقل
 - **نصب آسان** - مبتنی بر Docker Compose، راه‌اندازی با یک دستور
@@ -157,6 +157,7 @@ docker compose --profile all up -d                 # شروع تمام سروی�
 | تونل DNS (dnstt) | 53/udp | ★★★☆☆ | ★☆☆☆☆ | آخرین راه‌حل، سخت برای مسدود کردن |
 | Slipstream | 53/udp | ★★★☆☆ | ★★☆☆☆ | QUIC-over-DNS، ۱.۵-۵ برابر سریعتر از dnstt |
 | Telegram MTProxy | 993/tcp | ★★★★☆ | ★★★☆☆ | Fake-TLS V2، دسترسی مستقیم به تلگرام |
+| XHTTP (VLESS+XHTTP+Reality) | 2096/tcp | ★★★★★ | ★★★★☆ | Xray-core، آزمایشی، بدون نیاز به دامنه |
 | Psiphon | - | ★★★★☆ | ★★★☆☆ | مستقل، نیازی به سرور ندارد |
 | Tor (Snowflake) | - | ★★★★☆ | ★★☆☆☆ | مستقل، از شبکه Tor استفاده می‌کند |
 
@@ -234,7 +235,7 @@ moav build                # ساخت/بازسازی تمام کانتینرها
 
 </div>
 
-**پروفایل‌ها:** `proxy`، `wireguard`، `amneziawg`، `dnstunnel`، `trusttunnel`، `telegram`، `admin`، `conduit`، `snowflake`، `monitoring`، `all`
+**پروفایل‌ها:** `proxy`، `wireguard`، `amneziawg`، `dnstunnel`، `trusttunnel`، `telegram`، `xhttp`، `admin`، `conduit`، `snowflake`، `monitoring`، `all`
 
 **نام مستعار سرویس‌ها:** `conduit`←psiphon-conduit، `singbox`←sing-box، `wg`←wireguard، `dns/dnstt/slip`←dnstunnel، `tg/mtproxy`←telemt
 
@@ -364,6 +365,7 @@ moav logs conduit             # مشاهده لاگ‌های conduit (لینک R
 | 51821/udp | UDP | AmneziaWG | خیر |
 | 8080/tcp | TCP | wstunnel | خیر |
 | 993/tcp | TCP | Telegram MTProxy | خیر |
+| 2096/tcp | TCP | XHTTP (VLESS+XHTTP+Reality) | خیر |
 | 9443/tcp | TCP | داشبورد ادمین | خیر |
 | 9444/tcp | TCP | Grafana (مانیتورینگ) | خیر |
 | 53/udp | UDP | تونل DNS | بله |
@@ -375,6 +377,7 @@ moav logs conduit             # مشاهده لاگ‌های conduit (لینک R
 - **WireGuard** (UDP مستقیم + تونل WebSocket)
 - **AmneziaWG** (وایرگارد مبهم‌سازی شده، دور زدن DPI)
 - **Telegram MTProxy** (Fake-TLS، دسترسی مستقیم به تلگرام)
+- **XHTTP** (VLESS+XHTTP+Reality، بدون نیاز به دامنه)
 - **داشبورد ادمین** (با گواهی خودامضا)
 - **Conduit** (اهدای پهنای باند Psiphon)
 - **Snowflake** (اهدای پهنای باند Tor)
